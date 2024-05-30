@@ -48,6 +48,8 @@ function generarSrc(){
         case 13: src = src.concat("Q");
         break;
     }
+    cartaClicadaValor = src[src.length-1];
+
 
     switch (randomPalo){
         case 1: src = src.concat("C");
@@ -59,9 +61,9 @@ function generarSrc(){
         case 4: src = src.concat("S");
         break;
     }
+    cartaClicadaPalo = src[src.length-1];
 
     src = src.concat(".png");
-    console.log(src);
 
     return src;
 }
