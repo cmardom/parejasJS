@@ -1,7 +1,5 @@
 function girarCarta(cartaClicada){
-
-
-
+    //cartasGeneradas1.push(cartaClicada);
     if (cartasGeneradas1.indexOf(cartaClicada)<0){
         cartaClicada.src = generarSrc();
         cartasGeneradas1.push(cartaClicada);
@@ -10,6 +8,17 @@ function girarCarta(cartaClicada){
         cartasGeneradas2.push(cartaClicada);
     }
 
+}
+
+function comprobarPares(){
+    for (let i = 0; i < cartasGeneradas1.length; i++) {
+        return cartasGeneradas1[i].src === cartasGeneradas2[i].src;
+    }
+
+}
+
+function taparCarta(cartaClicada){
+    cartaClicada.src="/pruebaParejas/pruebaParejas/src/assets/img/cartas/red_back.png";
 }
 
 
