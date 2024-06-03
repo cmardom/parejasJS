@@ -6,11 +6,14 @@ const etqCartas = document.querySelectorAll('#tablero img');
 
 
 let cartaClicadaPalo, cartaClicadaValor;
+let cartasGeneradas1 = [];
+let cartasGeneradas2 = [];
 
 for (let img of etqCartas) {
-    addEventListener('click', event => {
+    img.addEventListener('click', event => {
         let cartaClicada = event.target;
         girarCarta(cartaClicada);
 
+        console.log(cartasGeneradas1);
     })
 }

@@ -1,5 +1,15 @@
 function girarCarta(cartaClicada){
-    cartaClicada.src = generarSrc();
+
+
+
+    if (cartasGeneradas1.indexOf(cartaClicada)<0){
+        cartaClicada.src = generarSrc();
+        cartasGeneradas1.push(cartaClicada);
+    } else {
+        cartaClicada.src = generarSrc();
+        cartasGeneradas2.push(cartaClicada);
+    }
+
 }
 
 
@@ -43,9 +53,9 @@ function generarSrc(){
         break;
         case 11: src = src.concat("J");
         break;
-        case 12: src = src.concat("K");
+        case 12: src = src.concat("Q");
         break;
-        case 13: src = src.concat("Q");
+        case 13: src = src.concat("K");
         break;
     }
     cartaClicadaValor = src[src.length-1];
@@ -64,6 +74,7 @@ function generarSrc(){
     cartaClicadaPalo = src[src.length-1];
 
     src = src.concat(".png");
+
 
     return src;
 }
