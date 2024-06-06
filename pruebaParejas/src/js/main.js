@@ -1,7 +1,18 @@
+//http-provider
+const obtenerJugadores = () =>{
+    let url = "http://localhost:3000/jugador";
+    return fetch(url).then(resp => resp.json());
+}
+
+
 //etq
-const etqTablero = document.getElementById('tablero');
-const etqCartas = document.querySelectorAll('#tablero img');
 const etqIntentos = document.getElementById('intentos');
+const etqUsuario = document.getElementById("usuario");
+const etqPass = document.getElementById("passwd");
+
+//botones
+const btnConsultar = document.getElementById("botonConsultar");
+btnConsultar.addEventListener("click", () => cargarJugadorLS());
 
 
 
@@ -18,8 +29,9 @@ let enJuego={
     intento:0,
 };
 
-generarBaraja();
 
+//juego
+generarBaraja();
 for (let i = 0; i < 12; i++) {
     document.getElementById("carta"+i)
         .addEventListener("click", ()=>girarCarta(i));

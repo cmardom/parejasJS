@@ -73,13 +73,22 @@ function taparCarta(cartaClicada){
 }
 
 
-function generarSrc(){
-
-
-}
-
 function randomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function cargarJugadorLS() {
+    obtenerJugadores().then(infoDB => {
+        infoDB.forEach(dato => {
+            console.log(dato);
+            if (dato.nombre === etqUsuario.value && dato.password === etqPass.value){
+                etqIntentos.innerText = "ok";
+            }
+
+
+
+        });
+    })
 }
