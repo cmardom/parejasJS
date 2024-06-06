@@ -1,91 +1,81 @@
-function girarCarta(cartaClicada){
-    //cartasGeneradas1.push(cartaClicada);
-    if (cartasGeneradas1.indexOf(cartaClicada)<0){
-        cartaClicada.src = generarSrc();
-        cartasGeneradas1.push(cartaClicada);
-    } else {
-        cartaClicada.src = generarSrc();
-        cartasGeneradas2.push(cartaClicada);
+function girarCarta(index){
+
+    //esta es la carta clicada
+    let carta= document.getElementById("carta"+index);
+
+    if (!carta.classList.contains("girada") /*&& jugador.id!=0*/){
+        carta.src = "assets/img/cartas/"+enJuego.mazo[index]+".png";
+        carta.classList.add("girada");
+        enJuego.cartasGiradas.push(index);
+
+        //si hay 2 giradas
+        if (enJuego.cartasGiradas.length%2===0){
+
+            //se declara la carta clicada anterior
+            let indexCartaAnterior = enJuego.cartasGiradas[enJuego.cartasGiradas.length-2];
+            let cartaAnterior = document.getElementById("carta"+indexCartaAnterior);
+
+
+            //si no son iguales los indices penultimo y ultimo en mazo
+            if (enJuego.mazo[indexCartaAnterior]!==enJuego.mazo[index]){
+
+                //se les da la vuelta y se les quita la clase
+                setTimeout(()=>{
+                    taparCarta(carta);
+                    taparCarta(cartaAnterior);
+                },500);
+
+                //se eliminan de cartasGiradas
+                enJuego.cartasGiradas.pop();
+                enJuego.cartasGiradas.pop();
+
+                enJuego.intento++;
+                etqIntentos.innerText = enJuego.intento;
+
+            } //si son iguales, se quedan destapadas
+
+
+        }
     }
+
+    //si estan todas giradas
+    if (enJuego.cartasGiradas.length===12){
+        etqIntentos.innerText="HAS GANAO";
+    }
+
+
+
+
+
+
+
 
 }
 
-function comprobarPares(){
-    for (let i = 0; i < cartasGeneradas1.length; i++) {
-        return cartasGeneradas1[i].src === cartasGeneradas2[i].src;
-    }
-
+function generarBaraja(){
+    let numero=["2","3","4","5","6","7","8","9","10","J","Q","K"];
+    let letra=["C","D","H","S"];
+    numero.forEach(n => {
+        letra.forEach(l => {
+            enJuego.mazo.push(n+l);
+        });
+    });
+    enJuego.mazo=_.shuffle(enJuego.mazo);
+    enJuego.mazo=enJuego.mazo.slice(0,6);
+    enJuego.mazo=enJuego.mazo.concat(enJuego.mazo);
+    enJuego.mazo=_.shuffle(enJuego.mazo);
 }
+
 
 function taparCarta(cartaClicada){
     cartaClicada.src="/pruebaParejas/pruebaParejas/src/assets/img/cartas/red_back.png";
+    cartaClicada.classList.remove("girada");
 }
 
 
 function generarSrc(){
-    // Clubs (C)
-    // A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K
-    // Diamonds (D)
-    // A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K
-    // Hearts (H)
-    // A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K
-    // Spades (S)
-    // A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K
-    // DOS DE CADA
-
-    let randomPalo = randomInt(1, 4);
-    let randomValor = randomInt(1, 13);
-    let src = "/pruebaParejas/pruebaParejas/src/assets/img/cartas/";
 
 
-
-    switch (randomValor){
-        case 1: src = src.concat("A");
-        break;
-        case 2: src = src.concat("2");
-        break;
-        case 3: src = src.concat("3");
-        break;
-        case 4: src = src.concat("4");
-        break;
-        case 5: src = src.concat("5");
-        break;
-        case 6: src = src.concat("6");
-        break;
-        case 7: src = src.concat("7");
-        break;
-        case 8: src = src.concat("8");
-        break;
-        case 9: src = src.concat("9");
-        break;
-        case 10: src = src.concat("10");
-        break;
-        case 11: src = src.concat("J");
-        break;
-        case 12: src = src.concat("Q");
-        break;
-        case 13: src = src.concat("K");
-        break;
-    }
-    cartaClicadaValor = src[src.length-1];
-
-
-    switch (randomPalo){
-        case 1: src = src.concat("C");
-        break;
-        case 2: src = src.concat("D");
-        break;
-        case 3: src = src.concat("H");
-        break;
-        case 4: src = src.concat("S");
-        break;
-    }
-    cartaClicadaPalo = src[src.length-1];
-
-    src = src.concat(".png");
-
-
-    return src;
 }
 
 function randomInt(min, max) {
