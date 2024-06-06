@@ -5,15 +5,19 @@ const obtenerJugadores = () =>{
 }
 
 
+
+
 //etq
 const etqIntentos = document.getElementById('intentos');
 const etqUsuario = document.getElementById("usuario");
 const etqPass = document.getElementById("passwd");
+const etqSaludo = document.getElementById("saludo");
 
 //botones
 const btnConsultar = document.getElementById("botonConsultar");
-btnConsultar.addEventListener("click", () => cargarJugadorLS());
+btnConsultar.addEventListener("click", () => iniciarSesion());
 
+const btnCerrar = document.getElementById("botonCerrarSesion");
 
 
 //componentes

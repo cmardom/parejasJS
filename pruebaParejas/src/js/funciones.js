@@ -79,12 +79,26 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function cargarJugadorLS() {
+function iniciarSesion() {
     obtenerJugadores().then(infoDB => {
         infoDB.forEach(dato => {
             console.log(dato);
-            if (dato.nombre === etqUsuario.value && dato.password === etqPass.value){
-                etqIntentos.innerText = "ok";
+            if (dato.nombre === etqUsuario.value && dato.passwd === etqPass.value){
+                //se actualiza componente
+                jugador.id = dato.id;
+                jugador.nombre = dato.nombre;
+                jugador.resultado = dato.resultado;
+
+                //se guarda en ls
+                localStorage.setItem("jugador", JSON.stringify(jugador));
+
+                //se cambia DOM = login();
+                etqSaludo.innerText = "Hola, " + dato.nombre;
+                /*btnCerrar.classList.remove("invisible");*/
+                btnConsultar.classList.add("invisible");
+                etqUsuario.classList.add("invisible");
+                etqPass.classList.add("invisible");
+
             }
 
 
